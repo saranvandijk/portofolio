@@ -3,146 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Saran van Dijk</title>
+    <title>Logboek Portfolio | Saran van Dijk</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #0056b3; --secondary: #f8f9fa; --text: #333; }
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { font-family: 'Inter', sans-serif; color: var(--text); background-color: #fff; line-height: 1.6; }
+        :root { --primary: #0056b3; --secondary: #f4f7f6; --text: #333; --white: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--secondary); color: var(--text); line-height: 1.6; }
         
-        nav { padding: 15px 10%; display: flex; justify-content: space-between; align-items: center; background: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .logo { font-weight: 800; font-size: 1rem; color: var(--primary); }
+        /* Navigatie */
+        nav { padding: 15px 10%; display: flex; justify-content: space-between; align-items: center; background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-weight: 800; font-size: 1.1rem; color: var(--primary); text-transform: uppercase; }
 
-        section { padding: 40px 10%; max-width: 1000px; margin: 0 auto; }
+        /* Login Scherm */
+        .login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--secondary); display: flex; justify-content: center; align-items: center; z-index: 2000; }
+        .login-card { background: var(--white); padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 90%; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; }
+        .btn { display: inline-block; width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 1rem; transition: 0.3s; }
+        .btn:hover { background: #004494; }
+
+        /* Logboek Inhoud */
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; display: none; }
+        header { text-align: center; margin-bottom: 40px; }
+        .log-item { background: var(--white); padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border-left: 6px solid var(--primary); }
+        .log-item h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; }
+        .log-item h3::before { content: "❑"; margin-right: 15px; font-size: 1.4rem; color: #ccc; }
+        .log-content { font-size: 1.05rem; color: #555; }
+        
+        footer { text-align: center; padding: 40px; font-size: 0.85rem; color: #888; }
         .hidden { display: none; }
-
-        .card { background: var(--secondary); padding: 30px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; }
-        .btn { display: inline-block; padding: 12px 25px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; text-decoration: none; transition: 0.3s; }
-        
-        .report-page { background: white; padding: 50px; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.02); }
-        .toc { background: #f9f9f9; padding: 25px; border-radius: 8px; margin-bottom: 40px; border-left: 5px solid var(--primary); }
-        .toc ul { list-style: none; padding-top: 10px; }
-        .toc a { color: var(--primary); text-decoration: none; font-weight: 600; }
-        
-        h2 { margin: 45px 0 20px; border-bottom: 2px solid var(--primary); padding-bottom: 10px; color: var(--primary); }
-        h3 { margin: 30px 0 10px; color: #444; font-size: 1.3rem; }
-        p { margin-bottom: 15px; text-align: justify; }
-        ul.list-content { margin-left: 20px; margin-bottom: 20px; }
-        
-        .back-to-top { font-size: 0.8rem; color: #aaa; text-decoration: none; float: right; font-weight: normal; }
-        footer { text-align: center; padding: 40px; background: var(--secondary); font-size: 0.8rem; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">SARAN VAN DIJK | 526145</div>
-        <button id="logoutBtn" class="btn hidden" onclick="location.reload()" style="background:#d9534f; padding: 5px 15px;">Uitloggen</button>
-    </nav>
-
-    <section id="login-sectie">
-        <div class="card">
-            <h2>Portofolio Inloggen</h2>
+    <div id="loginSection" class="login-overlay">
+        <div class="login-card">
+            <h2 style="margin-bottom: 10px;">Inloggen Logboek</h2>
+            <p style="margin-bottom: 20px; color: #666;">Voer je gegevens in om het logboek van Saran te bekijken.</p>
             <input type="text" id="username" placeholder="Gebruikersnaam">
             <input type="password" id="password" placeholder="Wachtwoord">
-            <button class="btn" onclick="checkLogin()">Inloggen</button>
+            <button class="btn" onclick="checkLogin()">Bekijk Logboek</button>
         </div>
-    </section>
+    </div>
 
-    <section id="menu-sectie" class="hidden">
-        <div class="card">
-            <h1>Mijn Documenten</h1>
-            <p style="margin-bottom:20px;">Kies een verslag om te bekijken.</p>
-            <button class="btn" onclick="showReport('report1')">1. Ondernemend Gedrag (Volledig)</button>
-        </div>
-    </section>
+    <nav id="navBar" class="hidden">
+        <div class="logo">Logboek Portfolio | Saran van Dijk</div>
+        <button onclick="location.reload()" style="background:none; border:none; color:#d9534f; cursor:pointer; font-weight:600;">Uitloggen</button>
+    </nav>
 
-    <section id="report1" class="hidden">
-        <button class="btn" onclick="showMenu()" style="background:#666; margin-bottom:20px;">← Terug</button>
-        
-        <div class="report-page">
-            <center>
-                <h1 style="font-size: 2.2rem;">Portofolio Ondernemend Gedrag</h1>
-                <p><strong>Saran van Dijk</strong> | Studentnummer: 526145</p>
-                <hr style="margin:20px 0; opacity:0.1;">
-            </center>
+    <div id="mainContent" class="container">
+        <header>
+            <h1 style="font-size: 2.5rem; color: #222;">Mijn Logboek</h1>
+            <p style="color: #777;">Opdracht 1: Ondernemend Gedrag & Mijn Omgeving</p>
+        </header>
 
-            <div class="toc" id="top">
-                <h3>Inhoudsopgave</h3>
-                <ul>
-                    <li><a href="#voorwoord">1. Voorwoord</a></li>
-                    <li><a href="#samenvatting">2. Samenvatting</a></li>
-                    <li><a href="#inleiding">3. Inleiding</a></li>
-                    <li><a href="#profiel">4. Profiel van mijzelf</a></li>
-                    <li><a href="#keuzes">5. Keuzes en ontwikkeling</a></li>
-                    <li><a href="#ondernemend">6. Ondernemend gedrag</a></li>
-                    <li><a href="#omgeving">7. Mijn omgeving bij Plus Holts</a></li>
-                </ul>
+        <div class="log-item">
+            <h3>Welke activiteiten heb je bij deze opdracht uitgevoerd?</h3>
+            <div class="log-content">
+                In deze opdracht heb ik mijn eigen ondernemend gedrag onderzocht binnen de supermarkt Plus Holts. Ik heb mijn dagelijkse taken geanalyseerd, zoals het verzorgen van voorraadbeheer, het aansturen van de vulploeg en kassières, en het ombouwen van actiekoppen op dinsdagen. Daarnaast heb ik een reflectie geschreven over mijn rolmodellen, capaciteiten en ambities binnen de retail.
             </div>
-
-            <h2 id="voorwoord">1. Voorwoord <a href="#top" class="back-to-top">↑ Omhoog</a></h2>
-            <p>In dit portofolio wil ik laten zien wat ondernemend gedrag voor mij betekent, zowel voor mezelf als voor mijn omgeving[cite: 20]. Ik beschrijf hoe ik dit in de praktijk heb toegepast, welke stappen ik heb gemaakt en ik laat een reflectie van mijzelf zien[cite: 21, 22].</p>
-
-            <h2 id="samenvatting">2. Samenvatting <a href="#top" class="back-to-top">↑ Omhoog</a></h2>
-            <p>Ik ben een behulpzaam en professioneel persoon die graag het initiatief neemt[cite: 39]. Mijn ambities binnen de retail zijn onder anderen meer productkennis, winkelbeheer en persoonlijke groei[cite: 40]. In dit verslag vertel ik over mijn rolmodel Thomas Shelby, mijn passie voor muziek en hoe ik ondernemend gedrag vertoon op de werkvloer bij Plus Holts[cite: 43, 46].</p>
-
-            <h2 id="inleiding">3. Inleiding <a href="#top" class="back-to-top">↑ Omhoog</a></h2>
-            <p>Voor mijn opleiding MBO 3 Middenkaderopleiding / Retail Specialist onderzoek ik mijn eigen ondernemende houding binnen de omgeving van de supermarkt[cite: 50, 51].</p>
-
-            <h2 id="profiel">4. Profiel van mijzelf <a href="#top" class="back-to-top">↑ Omhoog</a></h2>
-            <h3>Capaciteiten en ambities</h3>
-            <p>Ik toon graag initiatief door gesprekken aan te knopen met klanten en vind een professionele uitstraling belangrijk[cite: 55, 56]. Mijn ambitie is om alle kennis op te doen om een winkel goed te laten draaien, met een specifieke passie voor de productgroepen wijn en bier[cite: 59, 60]. Buiten werk speel ik bariton bij een muziekvereniging.</p>
-            <h3>Motivatie</h3>
-            <p>Ik hanteer het principe: "werk zien is werk doen. Duurt het minder dan 2 minuten? Doe het dan meteen". Ik vind voldoening in de afwisseling van het werk, vooral de actieombouw op dinsdagen[cite: 68, 69].</p>
-
-            <h2 id="keuzes">5. Keuzes en ontwikkeling <a href="#top" class="back-to-top">↑ Omhoog</a></h2>
-            <p>Ik heb voor deze opleiding gekozen omdat deze goed aansluit op de kaderopleiding en ik nog veel wil leren[cite: 99]. Mijn werk biedt mij een stabiele baan met doorgroeimogelijkheden in een vak dat ik leuk vind[cite: 100]. Muziek is altijd een passie geweest; na een pauze van 6 jaar ben ik onlangs weer begonnen omdat ik het spelen miste[cite: 101, 104, 105].</p>
-
-            <h2 id="ondernemend">6. Ondernemend gedrag <a href="#top" class="back-to-top">↑ Omhoog</a></h2>
-            <p>Ondernemend gedrag betekent voor mij: kansen zien, durven proberen en problemen oplossen[cite: 108]. Ik vertoon dit door bijvoorbeeld de emballageband te controleren om overstroming te voorkomen en door creatief lege plekken bij actiekoppen op te vullen[cite: 152, 154]. Mijn verbeterpunten zijn onder andere het actiever aandragen van eigen ideeën en het vergroten van mijn financiële inzicht in de winkel[cite: 128, 143].</p>
-
-            <h2 id="omgeving">7. Mijn omgeving bij Plus Holts <a href="#top" class="back-to-top">↑ Omhoog</a></h2>
-            <p>Plus Holts is een zelfbedieningssupermarkt met een breed assortiment en veel versproducten[cite: 163, 164]. In deze omgeving werk ik samen met verschillende teams:</p>
-            <ul class="list-content">
-                <li><strong>Vulploeg:</strong> Verantwoordelijk voor het vullen van kw-vracht, spiegelen en schoonmaken[cite: 171, 172].</li>
-                <li><strong>Kassières:</strong> Verzorgen de betalingen, postzaken en vormen het einde van de klantreis[cite: 175, 176].</li>
-                <li><strong>Broodafdeling:</strong> Verantwoordelijk voor het bakken van vers brood en snacks[cite: 174].</li>
-                <li><strong>Bezorging:</strong> Zorgt dat boodschappen op tijd bij zowel particuliere als zakelijke klanten aankomen[cite: 178].</li>
-                <li><strong>Leidinggevenden:</strong> Sturen het team aan, bestellen producten en zijn het aanspreekpunt voor complexe vragen[cite: 179, 180].</li>
-            </ul>
-            <p>Mijn eigen rol is zeer divers: ik controleer voorraden, stuur collega's aan, open of sluit de winkel en heb contact met leveranciers over logistieke zaken[cite: 85, 88, 91].</p>
         </div>
-    </section>
 
-    <footer>
-        &copy; 2025 Saran van Dijk | ROC Midden Nederland | MKO010
-    </footer>
+        <div class="log-item">
+            <h3>Welke feedback heb je gekregen en van wie?</h3>
+            <div class="log-content">
+                Ik heb geleerd dat feedback van anderen essentieel is om te groeien. In mijn werk krijg ik waardering van klanten en collega’s wanneer zij goed geholpen zijn. Van mijn leidinggevende heb ik de ruimte gekregen om initiatief te nemen, zoals het zelfstandig controleren van de emballageband en het oplossen van lege plekken in de winkel.
+            </div>
+        </div>
+
+        <div class="log-item">
+            <h3>Wat heb je met de feedback gedaan?</h3>
+            <div class="log-content">
+                Ik gebruik feedback om mijn werkwijze aan te passen en oplossingen vanuit een ander perspectief te bekijken. Wanneer iets niet lukt, vraag ik hulp en pas ik mijn gedrag aan. Ik ben actiever geworden in het nemen van verantwoordelijkheid, bijvoorbeeld door taken die minder dan 2 minuten duren direct uit te voeren.
+            </div>
+        </div>
+
+        <div class="log-item">
+            <h3>Wat zou je nog willen verbeteren? Wat wil je dan bereiken? Hoe ga je dat aanpakken?</h3>
+            <div class="log-content">
+                Ik wil mijn productkennis (vooral over wijn en bier) en financieel inzicht in de winkel verbeteren. Mijn doel is om een winkel volledig zelfstandig te kunnen laten draaien. Ik ga dit aanpakken door vakmagazines te lezen, advies te vragen aan ervaren collega's en mij meer te verdiepen in de financiële resultaten van de winkel. Ook wil ik leren om taken beter te delegeren.
+            </div>
+        </div>
+
+        <div class="log-item">
+            <h3>Welke aandachtspunten neem je mee naar de volgende opdracht? Wat wil je dan bereiken? Hoe ga je dat aanpakken en wat heb je daarvoor nodig?</h3>
+            <div class="log-content">
+                Voor de volgende opdracht wil ik meer consistentie tonen in het uitwerken van mijn taken. Ik wil meer durven experimenteren en mijn eigen ideeën actiever aandragen en beschermen. Hiervoor heb ik meer inzicht nodig in risicobeperking en een proactieve houding om kansen direct te verzilveren wanneer ze zich voordoen.
+            </div>
+        </div>
+
+        <footer>
+            &copy; 2025-2026 Saran van Dijk | Studentnummer: 526145 | Klas: MKO010
+        </footer>
+    </div>
 
     <script>
         function checkLogin() {
             const user = document.getElementById('username').value.toLowerCase();
             const pass = document.getElementById('password').value;
+            // Je kunt hier je eigen wachtwoord 'mko2025!' gebruiken
             if (user === "saran" && pass === "mko2025!") {
-                document.getElementById('login-sectie').classList.add('hidden');
-                document.getElementById('menu-sectie').classList.remove('hidden');
-                document.getElementById('logoutBtn').classList.remove('hidden');
-            } else { alert("Onjuiste gegevens."); }
-        }
-        function showReport(id) {
-            document.getElementById('menu-sectie').classList.add('hidden');
-            document.getElementById(id).classList.remove('hidden');
-            window.scrollTo(0,0);
-        }
-        function showMenu() {
-            document.getElementById('report1').classList.add('hidden');
-            document.getElementById('menu-sectie').classList.remove('hidden');
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('navBar').classList.remove('hidden');
+                document.getElementById('mainContent').style.display = "block";
+            } else {
+                alert("Onjuiste inloggegevens. Probeer het opnieuw.");
+            }
         }
     </script>
 </body>
 </html>
-        }
-    </script>
-</body>
-</html>
-
